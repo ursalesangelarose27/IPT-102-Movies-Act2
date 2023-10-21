@@ -1,31 +1,69 @@
-﻿@model List<MovieViewModel>
-
-@{
-    ViewData["Title"] = "Home Page";
-}
-
-
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Rating</th>
-            <th>Release Year</th>
-            <th>Genre</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var movie in Model)
-        {
-            <tr>
-                <td>@movie.Id</td>
-                <td ><a href = "/movies/getmovie/@movie.Id" > @movie.Name </a></td>
-                <td>@movie.Rating</td>
-                <td>@movie.ReleaseYear</td>
-                <td>@movie.Genre</td>
-            </tr>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Table</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .custom-card {
+            background-color: #f8f9fa;
+            border: none;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 0;
+            transform: scale(1);
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+            color: #333;
         }
-    </tbody>
-</table>
 
+            .custom-card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                background-color: #fff;
+            }
+
+            .custom-card img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 10px 10px 0 0;
+            }
+
+            .custom-card .card-body {
+                padding: 10px;
+                background-color: #f8f9fa;
+            }
+
+            .custom-card .card-title a {
+                color: #007bff;
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+                .custom-card .card-title a:hover,
+                .custom-card .card-title a:focus {
+                    color: #0056b3;
+                    text-decoration: underline;
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            @foreach (var movie in Model)
+            {
+                <div class="col-md-2">
+                    <div class="card custom-card">
+                        <img src="@movie.ImageUrl" alt="@movie.Name" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="/movies/getmovie/@movie.Id">@movie.Name</a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
